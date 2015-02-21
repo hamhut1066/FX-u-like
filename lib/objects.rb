@@ -32,7 +32,6 @@ module Parser
     f.close()
 
     doc = doc.element_children[0].element_children[2].element_children
-    # return doc
     doc = doc.select { |x| Date.parse(x.attribute('time')) <= date }
 
     to_val = doc[0].element_children.select { |x| x.attribute('currency').value.eql? to }
@@ -41,5 +40,3 @@ module Parser
   end
 end
 
-# puts ExchangeRate.at(0,0,0)
-# 3.25
