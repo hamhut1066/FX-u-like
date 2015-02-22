@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %title Currency Converter
+  %body
+    #wrapper
+      #header
+        %h1 FX-u-like
+ 
+      #content
+        %form{:action => "", :method => 'POST'}
+          %fieldset
+            %ul
+              %li
+                %label{:for => 'date'} Date:
+                %input{:type => 'date', :name => 'date', :value => @date}
+              %li
+                %label{:for => 'amount'} Amount:
+                %input{:type => 'text', :name => 'amount'}
+              %li
+                %label{:for => 'from'} From:
+                %select{:name => 'from'}
+                  - @currencies.each do |i|
+                    %option{:name => i, :value => i}= i
+              %li
+                %label{:for => 'to'} To:
+                %select{:name => 'to'}
+                  - @currencies.each do |i|
+                    %option{:name => i, :value => i}= i
+              %li
+                %input{:type => 'submit', :value => 'Convert', :class => 'button'}
+
+      #footer
+        - if @amount != nil
+          %h2= @string
+          %h3= @amount
