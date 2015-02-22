@@ -6,3 +6,9 @@ I hope that this provides an insight into my programming abilities.
 
 I am not fluent in Ruby, but learning every day, and wish to become more so, through joining your company and learning.
 
+
+This can simply be run and installed using bundler.
+
+`bundle install`
+
+`bundle exec ruby app.rb`
