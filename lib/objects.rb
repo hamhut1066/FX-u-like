@@ -36,12 +36,18 @@ module Parser
     f.close()
 
     doc = doc.element_children[0].element_children[2].element_children
+    last_elem = doc.last
     doc = doc.select { |x| Date.parse(x.attribute('time')) <= date }
+    if doc.length == 0
+      doc = last_elem
+    else
+      doc  = doc[0]
+    end
 
-    @currency = doc[0].element_children.map { |x| x.attribute('currency').value }
-    to_val = doc[0].element_children.select { |x| x.attribute('currency').value.eql? to }
-    from_val = doc[0].element_children.select { |x| x.attribute('currency').value.eql? from }
-    from_val[0].attribute('rate').value.to_f / to_val[0].attribute('rate').value.to_f
+    to_val = doc.element_children.select { |x| x.attribute('currency').value.eql? to }
+    from_val = doc.element_children.select { |x| x.attribute('currency').value.eql? from }
+
+    to_val[0].attribute('rate').value.to_f / from_val[0].attribute('rate').value.to_f
   end
 
   def Parser.Eurofxref_cur

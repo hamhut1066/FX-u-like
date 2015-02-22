@@ -16,17 +16,23 @@
                 %input{:type => 'date', :name => 'date', :value => @date}
               %li
                 %label{:for => 'amount'} Amount:
-                %input{:type => 'text', :name => 'amount'}
+                %input{:type => 'text', :name => 'amount', :value => @amount_val}
               %li
                 %label{:for => 'from'} From:
                 %select{:name => 'from'}
                   - @currencies.each do |i|
-                    %option{:name => i, :value => i}= i
+                    - if @from_val == i
+                      %option{:name => i, :value => i, :selected => "selected"}= i
+                    - else
+                      %option{:name => i, :value => i}= i
               %li
                 %label{:for => 'to'} To:
                 %select{:name => 'to'}
                   - @currencies.each do |i|
-                    %option{:name => i, :value => i}= i
+                    - if @to_val == i
+                      %option{:name => i, :value => i, :selected => "selected"}= i
+                    - else
+                      %option{:name => i, :value => i}= i
               %li
                 %input{:type => 'submit', :value => 'Convert', :class => 'button'}
 
