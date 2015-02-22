@@ -9,9 +9,17 @@ require_relative 'lib/objects'
 post '/' do
   @currencies = ExchangeRate.currencies
   @amount = params['amount'].to_i * ExchangeRate.at(params['date'],params['to'],params['from'])
-  tmp= Date.today
+
+  begin
+    tmp = Date.parse(params['date'])
+  rescue ArgumentError, TypeError
+    tmp = Date.today
+  end
+  @to_val = params['to']
+  @from_val = params['from']
+  @amount_val = params['amount']
   @date = "#{tmp.day}/#{tmp.month}/#{tmp.year}"
-  @string = "#{params['to']} => #{params['from']} :"
+  @string = "#{params['from']} => #{params['to']} :"
   haml :index
 end
 
